@@ -14,7 +14,12 @@ class App extends Component {
   //dla wywoływanych eventów dodajemy w nazwie słówko Handler (good practice)
   //funckję wywołujemy bez nawiasów (), przekazujemy tylko referencję
   switchNameHandler = () => {
-    console.log('click test')
+    //DO NOT DO THIS: this.state.persons[0].name = 'John'
+    this.setState({persons: [ 
+      { name: 'Maximilina', age: 22 },
+      { name: 'Adam', age: 16 },
+      { name: 'Ada', age: 36 }
+    ]})
   }
 
   render() {
