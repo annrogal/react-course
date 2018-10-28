@@ -47,16 +47,11 @@ class App extends Component {
       cursor: 'pointer'
     };
 
-     return (
-       <div className="App">
-         <h1>I am React App!</h1>
-        
-         <button 
-          style={style}
-          onClick={ this.togglePersonsHandler }>Switch Name</button>
-          { 
-            this.state.showPersons === true ? 
-           <div>
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
             <Person name={ this.state.persons[0].name } 
           age={ this.state.persons[0].age }/>
             <Person name={ this.state.persons[1].name }
@@ -65,11 +60,20 @@ class App extends Component {
           changed={ this.nameChangedHandler}>My hobby is swimming</Person>
             <Person name={ this.state.persons[2].name }
           age={ this.state.persons[2].age }/>    
-            </div> : null
-          } 
+            </div>
+      );
+    }
+
+     return (
+       <div className="App">
+         <h1>I am React App!</h1>
+         <button 
+          style={style}
+          onClick={ this.togglePersonsHandler }>Switch Name</button>
+          {persons}
        </div>
      );
-    //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'I\'m React app!'))
+    //return React.cr eateElement('div', {className: 'App'}, React.createElement('h1', null, 'I\'m React app!'))
   }
 }
 
