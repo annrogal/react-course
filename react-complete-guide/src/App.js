@@ -15,14 +15,6 @@ class App extends Component {
 
   //dla wywoływanych eventów dodajemy w nazwie słówko Handler (good practice)
   //funckję wywołujemy bez nawiasów (), przekazujemy tylko referencję
-  switchNameHandler = (newName) => {
-    //DO NOT DO THIS: this.state.persons[0].name = 'John'
-    this.setState({persons: [ 
-      { name: newName, age: 22 },
-      { name: 'Adam', age: 16 },
-      { name: 'Ada', age: 36 }
-    ]})
-  }
 
   nameChangedHandler = (event) => {
     //DO NOT DO THIS: this.state.persons[0].name = 'John'
@@ -31,6 +23,12 @@ class App extends Component {
       { name: event.target.value, age: 16 },
       { name: 'Ada', age: 36 }
     ]})
+  }
+
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
   togglePersonsHandler = () => {
@@ -52,8 +50,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person 
+            click={() => this.deletePersonHandler(index)}
             name={person.name} 
             age={person.age}/>
           })}
